@@ -1,0 +1,18 @@
+{
+  "name": "a-ratk",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^4.4.5"
+  },
+  "dependencies": {
+    "aframe": "^1.4.2",
+    "ratk": "^0.2.1"
+  }
+}
