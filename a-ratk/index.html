@@ -9,16 +9,18 @@
     
     <title>Vite App</title>
   </head>
-  <body>
-    <button id="arBtn">Enter MR</button>
-       <a-scene ratk id="scene">
-        <a-assets>
-          <img src="tiles.jpg" id="tiles" alt="">
-          <img id="sky" src="vr-360-wormhole-straight-through-087867058_prevstill.webp" alt>
-        </a-assets>
-        <a-box position="0 0 -2" color="green"></a-box>
-        <a-entity id="light" light="type: ambient; color: #888"></a-entity>
-    </a-scene>
-    <script type="module" src="/main.js"></script>
-  </body>
+ <body style="margin: 0">
+		<div id="scene-container" style="display: block"></div>
+		<button
+			id="ar-button"
+			style="position: fixed; top: 10px; left: 10px"
+		></button>
+		<button
+			id="web-launch-button"
+			style="position: fixed; top: 10px; left: 10px; display: none"
+		>
+			OPEN ON META QUEST
+		</button>
+    <script type="module" src="main.js"></script>
+	</body>
 </html>
