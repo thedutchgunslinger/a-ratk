@@ -176,6 +176,21 @@ function init() {
 		},
 	});
 
+  //  const skyGeo = new THREE.SphereGeometry(18, 25, 25);
+
+
+  //  const loader = new THREE.TextureLoader();
+  //  const skyTexture = loader.load("sky.webp");
+
+  //  const skyMat = new THREE.MeshBasicMaterial({
+  //    map: skyTexture,
+  //    side: THREE.BackSide,
+  //  });
+
+  //  const sky = new THREE.Mesh(skyGeo, skyMat);
+  //  sky.position.set(0, 0, 0);
+  //  scene.add(sky);
+
 	
 
 
@@ -189,7 +204,7 @@ function init() {
 
       // Set the material of the mesh
       mesh.material = new MeshBasicMaterial({
-        wireframe: false,
+        // wireframe: true,
         color: Math.random() * 0xffffff,
         colorWrite: false, // Set colorWrite to false to prevent the plane from being colored by the material, this basically makes it a cloak
       });
@@ -208,6 +223,18 @@ function init() {
         planes[1].material.colorWrite = true;
         planes[1].visible = false;
 
+        const skyTexture = "sky.webp";
+
+        const boxGeo = new THREE.BoxGeometry(planes[1].parent.boundingRectangleWidth *2,  2, planes[1].parent.boundingRectangleHeight * 2);
+        const boxMat = new THREE.MeshBasicMaterial({
+          // color: 0x0ffff0,
+          map: new THREE.TextureLoader().load(skyTexture),
+          side: THREE.BackSide,
+        });
+        const box = new THREE.Mesh(boxGeo, boxMat);
+        box.position.set(planes[1].parent.position.x, planes[1].parent.position.y + 0.5, planes[1].parent.position.z);
+        scene.add(box);
+
         console.log("planes", planes[1]);
 
         // const box = document.createElement("a-box");
@@ -224,20 +251,7 @@ function init() {
         // sky.setAttribute("src", "#sky");
         // this.el.sceneEl.appendChild(sky);
 
-        const skyGeo = new THREE.SphereGeometry(10000, 25, 25);
-
-        const loader = new THREE.TextureLoader();
-        const skyTexture = loader.load(
-          "sky.webp"
-        );
-
-        const skyMat = new THREE.MeshBasicMaterial({
-          map: skyTexture,
-          side: THREE.BackSide,
-        });
-
-        const sky = new THREE.Mesh(skyGeo, skyMat);
-        scene.add(sky);
+       
 
         // Create a SphereGeometry for the skysphere
         // const skysphereGeometry = new THREE.SphereGeometry(10, 40, 40);
