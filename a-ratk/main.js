@@ -224,23 +224,36 @@ function init() {
         // sky.setAttribute("src", "#sky");
         // this.el.sceneEl.appendChild(sky);
 
-        const skyTexture = "sky.webp";
+        const skyGeo = new THREE.SphereGeometry(10000, 25, 25);
 
-        // Create a SphereGeometry for the skysphere
-        const skysphereGeometry = new THREE.SphereGeometry(10, 40, 40);
+        const loader = new THREE.TextureLoader();
+        const skyTexture = loader.load(
+          "sky.webp"
+        );
 
-        // Create a MeshBasicMaterial with the sky texture
-        const texture = new THREE.TextureLoader().load(skyTexture);
-        const skysphereMaterial = new THREE.MeshBasicMaterial({
-          // color: 0x0ffff0,
-          map: texture,
+        const skyMat = new THREE.MeshBasicMaterial({
+          map: skyTexture,
           side: THREE.BackSide,
         });
 
-        // Create a Mesh with the geometry and material and add it to the scene
-        const skysphere = new THREE.Mesh(skysphereGeometry, skysphereMaterial);
+        const sky = new THREE.Mesh(skyGeo, skyMat);
+        scene.add(sky);
 
-        scene.add(skysphere);
+        // Create a SphereGeometry for the skysphere
+        // const skysphereGeometry = new THREE.SphereGeometry(10, 40, 40);
+
+        // Create a MeshBasicMaterial with the sky texture
+        // const texture = new THREE.TextureLoader().load(skyTexture);
+        // const skysphereMaterial = new THREE.MeshBasicMaterial({
+          // color: 0x0ffff0,
+          // map: texture,
+          // side: THREE.BackSide,
+        // });
+
+        // Create a Mesh with the geometry and material and add it to the scene
+        // const skysphere = new THREE.Mesh(skysphereGeometry, skysphereMaterial);
+
+        // scene.add(skysphere);
       }
     };
 	ratk.onMeshAdded = (mesh) => {
