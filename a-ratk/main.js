@@ -225,14 +225,32 @@ function init() {
 
         const skyTexture = "sky.webp";
 
-        const boxGeo = new THREE.BoxGeometry(planes[1].parent.boundingRectangleWidth *2,  2, planes[1].parent.boundingRectangleHeight * 2);
+        const boxGeo = new THREE.BoxGeometry(planes[1].parent.boundingRectangleWidth,  2, planes[1].parent.boundingRectangleHeight);
+
+        {
+  const loader = new THREE.CubeTextureLoader();
+  const boxTexture = loader.load([
+  'skybox/vz_sinister_land_back.png',
+  'skybox/vz_sinister_land_front.png',
+  'skybox/vz_sinister_land_up.png',
+  'skybox/vz_sinister_land_down.png',
+  'skybox/vz_sinister_land_right.png',
+  'skybox/vz_sinister_land_left.png',
+  ]);
+      
+      const skyBoxMat = new THREE.MeshBasicMaterial({
+        // map: boxTexture,
+        color: 0x0ffff0,
+        side: THREE.BackSide,
+      });
+
         const boxMat = new THREE.MeshBasicMaterial({
           // color: 0x0ffff0,
           map: new THREE.TextureLoader().load(skyTexture),
           side: THREE.BackSide,
         });
-        const box = new THREE.Mesh(boxGeo, boxMat);
-        box.position.set(planes[1].parent.position.x, planes[1].parent.position.y + 0.5, planes[1].parent.position.z);
+        const box = new THREE.Mesh(boxGeo, skyBoxMat);
+        box.position.set(planes[1].parent.position.x, planes[1].parent.position.y + 1, planes[1].parent.position.z);
         scene.add(box);
 
         console.log("planes", planes[1]);
@@ -291,7 +309,7 @@ function init() {
 	};
 	scene.add(ratk.root);
 }
-
+}
 
 
 function onWindowResize() {
