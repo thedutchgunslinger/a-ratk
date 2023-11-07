@@ -1,7 +1,7 @@
-import { RealityAccelerator } from "ratk";
+import { RealityAccelerator, ARButton } from "ratk";
 import { MeshBasicMaterial } from "three";
 let ratk;
-
+const arBtn = document.querySelector("#arBtn");
 AFRAME.registerComponent("ratk", {
   init: function () {
     console.log("renderer 1", this.el.renderer); // OK
@@ -10,6 +10,20 @@ AFRAME.registerComponent("ratk", {
 
     let planes = []; // Array to store the planes
     let planeCounter = 0; // Counter to keep track of the number of planes added
+
+    ARButton.convertToARButton(arBtn, renderer, {
+      requiredFeatures: [
+        "anchors",
+        "plane-detection",
+        "hit-test",
+        "mesh-detection",
+        "local-floor",
+      ],
+      onUnsupported: () => {
+        arButton.style.display = "none";
+        // webLaunchButton.style.display = "block";
+      },
+    });
 
     ratk.onPlaneAdded = (plane) => {
       // get the mesh of the plane
